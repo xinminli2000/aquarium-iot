@@ -1,6 +1,6 @@
 <template>
   <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#33aef0" text-color="#fff" active-text-color="#ffd04b">
-    <el-menu-item :index="item.path" v-for="item in noChildren" :key="item.path">
+    <el-menu-item :index="item.path" v-for="item in noChildren" :key="item.path" @click="clickMenu(item)">
       <i :class="'el-icon-' + item.icon"></i>
       <span slot="title">{{ item.label }}</span>
     </el-menu-item>
@@ -10,9 +10,9 @@
         <span>{{ item.label }}</span>
       </template>
       <el-menu-item-group>
-        <el-menu-item index="subItem.path" v-for="(subItem, subIndex) in item.children" :key="subIndex"
-          ><i :class="'el-icon-' + subItem.icon"></i>{{ subItem.label }}</el-menu-item
-        >
+        <el-menu-item index="subItem.path" v-for="(subItem, subIndex) in item.children" :key="subIndex" @click="clickMenu(subItem)">
+          <i :class="'el-icon-' + subItem.icon"></i>{{ subItem.label }}
+        </el-menu-item>
       </el-menu-item-group>
     </el-submenu>
   </el-menu>
@@ -33,16 +33,19 @@ export default {
       asideMenu: [
         {
           path: '/',
+          name: 'home',
           label: '首页',
           icon: 'home'
         },
         {
           path: '/user',
+          name: 'user',
           label: '用户管理',
           icon: 'user'
         },
         {
           path: '/tank',
+          name: 'tank',
           label: '鱼缸管理',
           icon: 'box'
         },
@@ -52,17 +55,24 @@ export default {
           children: [
             {
               path: 'other1',
+              name: 'other1',
               label: '其它1',
               icon: 'trophy'
             },
             {
               path: 'other2',
+              name: 'other2',
               label: '其它2',
               icon: 'trophy-1'
             }
           ]
         }
       ]
+    }
+  },
+  methods: {
+    clickMenu(item) {
+      this.$store.commit('selectMenu', item)
     }
   }
 }
@@ -71,5 +81,6 @@ export default {
 <style lang="scss" scoped>
 .el-menu {
   height: 100%;
+  border: none;
 }
 </style>
