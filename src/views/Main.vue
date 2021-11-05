@@ -3,8 +3,8 @@
     <el-aside width="200px"><common-aside></common-aside></el-aside>
     <el-container>
       <el-header><common-header></common-header></el-header>
-      <common-tag> </common-tag>
-      <el-main>main</el-main>
+      <common-tag></common-tag>
+      <el-main><router-view /></el-main>
     </el-container>
   </el-container>
 </template>

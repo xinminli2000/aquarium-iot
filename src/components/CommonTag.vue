@@ -1,6 +1,6 @@
 <template>
   <div class="tags">
-    <el-tag size="small" :key="tag.name" v-for="tag in tags" :closable="tag.name !== 'home'" @close="handleClose(tag)">
+    <el-tag size="small" :key="tag.name" v-for="tag in tags" :closable="tag.name !== 'home'" @close="handleClose(tag)" @click="changeMenu(tag)">
       {{ tag.label }}
     </el-tag>
   </div>
@@ -15,11 +15,7 @@ export default {
     })
   },
   data() {
-    return {
-      dynamicTags: ['标签一', '标签二', '标签三'],
-      inputVisible: false,
-      inputValue: ''
-    }
+    return {}
   },
   methods: {
     ...mapMutations({
@@ -27,6 +23,10 @@ export default {
     }),
     handleClose(tag) {
       this.close(tag)
+    },
+    changeMenu(item) {
+      this.$router.push({ name: item.name }).catch(() => {})
+      this.$store.commit('selectMenu', item)
     }
   }
 }
