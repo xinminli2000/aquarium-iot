@@ -1,5 +1,7 @@
 <template>
-  <el-menu default-active="2" class="el-menu-vertical-demo" background-color="#33aef0" text-color="#fff" active-text-color="#ffd04b">
+  <el-menu :collapse="isCollapse" default-active="2" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+    <h3 v-show="isCollapse">鳉鱼</h3>
+    <h3 v-show="!isCollapse">非洲鳉鱼饲喂管理系统</h3>
     <el-menu-item :index="item.path" v-for="item in noChildren" :key="item.path" @click="clickMenu(item)">
       <i :class="'el-icon-' + item.icon"></i>
       <span slot="title">{{ item.label }}</span>
@@ -26,6 +28,9 @@ export default {
     },
     hasChildren() {
       return this.asideMenu.filter((item) => item.children)
+    },
+    isCollapse() {
+      return this.$store.state.tab.isCollapse
     }
   },
   data() {
@@ -35,7 +40,7 @@ export default {
           path: '/',
           name: 'home',
           label: '首页',
-          icon: 'home'
+          icon: 's-home'
         },
         {
           path: '/user',
@@ -50,7 +55,7 @@ export default {
           icon: 'box'
         },
         {
-          label: '其它管理',
+          label: '权限管理',
           icon: 'copy-document',
           children: [
             {
@@ -83,5 +88,13 @@ export default {
 .el-menu {
   height: 100%;
   border: none;
+  h3 {
+    color: #ffffff;
+    text-align: center;
+    line-height: 48px;
+  }
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
 }
 </style>

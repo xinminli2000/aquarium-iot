@@ -1,7 +1,8 @@
 export default {
   state: {
-    menu: [],
+    isCollapse: false,
     currentMenu: null,
+    menu: [],
     tagList: [
       {
         path: '/',
@@ -26,6 +27,9 @@ export default {
     closeTag(state, val) {
       let result = state.tagList.findIndex((item) => item.name === val.name)
       state.tagList.splice(result, 1)
+    },
+    collapseMenu(state) {
+      state.isCollapse = !state.isCollapse
     }
   },
   actions: {}

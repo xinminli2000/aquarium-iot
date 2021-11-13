@@ -1,6 +1,14 @@
 <template>
   <div class="tags">
-    <el-tag size="small" :key="tag.name" v-for="tag in tags" :closable="tag.name !== 'home'" @close="handleClose(tag)" @click="changeMenu(tag)">
+    <el-tag
+      size="small"
+      :key="tag.name"
+      v-for="tag in tags"
+      :closable="tag.name !== 'home'"
+      @close="handleClose(tag)"
+      @click="changeMenu(tag)"
+      :effect="$route.name === tag.name ? 'dark' : 'plain'"
+    >
       {{ tag.label }}
     </el-tag>
   </div>
@@ -37,6 +45,7 @@ export default {
   padding: 10px;
   .el-tag {
     margin-right: 15px;
+    cursor: pointer;
   }
 }
 </style>
