@@ -9,11 +9,12 @@
     <el-submenu index="item.path" v-for="(item, index) in hasChildren" :key="index">
       <template slot="title">
         <i :class="'el-icon-' + item.icon"></i>
-        <span>{{ item.label }}</span>
+        <span slot="title">{{ item.label }}</span>
       </template>
       <el-menu-item-group>
         <el-menu-item index="subItem.path" v-for="(subItem, subIndex) in item.children" :key="subIndex" @click="clickMenu(subItem)">
-          <i :class="'el-icon-' + subItem.icon"></i>{{ subItem.label }}
+          <i :class="'el-icon-' + subItem.icon"></i>
+          <span slot="title">{{ subItem.label }}</span>
         </el-menu-item>
       </el-menu-item-group>
     </el-submenu>
@@ -24,13 +25,16 @@
 export default {
   computed: {
     noChildren() {
-      return this.asideMenu.filter((item) => !item.children)
+      return this.menu.filter((item) => !item.children)
     },
     hasChildren() {
-      return this.asideMenu.filter((item) => item.children)
+      return this.menu.filter((item) => item.children)
     },
     isCollapse() {
       return this.$store.state.tab.isCollapse
+    },
+    menu() {
+      return this.$store.state.tab.menu
     }
   },
   data() {
